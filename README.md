@@ -1,2 +1,1 @@
-# Collie
-# Authenticated Keyword Search on Graphs
+# Collie: Authenticated Keyword Search on Graphs
