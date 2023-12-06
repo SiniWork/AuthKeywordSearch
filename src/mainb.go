@@ -13,6 +13,11 @@ func main() {
 	dataset := "imdb"
 	g.LoadGraph("./data/"+dataset+".json")
 	g.GenAuthInfo("./data/"+dataset+"_invert_key.json")
+	key1 := "RootDigest"
+	eth.CommitEth(key1, string(g.Mbt.RootHash))
+	key2 := "GraphDigest"
+	eth.CommitEth(key1, string(g.GHash))
+
 
 	//fmt.Println("Jude: ", len(g.Mbt.Buckets["Jude"]))
 	//fmt.Println("Randy: ", len(g.Mbt.Buckets["Randy"]))
@@ -40,8 +45,8 @@ func main() {
 		RS: voSP.RS,
 	}
 	onChainInfo := verification.OnChainInfo{
-		OnRH: g.Mbt.RootHash,
-		OnGH: g.GHash,
+		OnRH: []byte(eth.QueryEth("RootDigest").([]interface{})[1].(string)),
+		OnGH: []byte(eth.QueryEth("GraphDigest").([]interface{})[1].(string)),
 		OnAc: g.Acc.Ac,
 		OnBase: g.Acc.G,
 		OnN: g.Acc.N,
